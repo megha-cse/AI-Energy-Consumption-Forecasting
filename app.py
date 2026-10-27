@@ -89,26 +89,27 @@ if st.button("⚡ Forecast Energy"):
 
 st.divider()
 
+
 # Historical consumption section
 st.header("📊 Historical Electricity Consumption")
 
-@st.cache_data
-def load_data():
-    df = pd.read_csv(
-        DATA_PATH,
-        sep=";",
-        na_values=["?"],
-        low_memory=False
-    )
-
-    df["Global_active_power"] = pd.to_numeric(
-        df["Global_active_power"],
-        errors="coerce"
-    )
-
-    return df.dropna(subset=["Global_active_power"])
-
 if DATA_PATH.exists():
+    @st.cache_data
+    def load_data():
+        df = pd.read_csv(
+            DATA_PATH,
+            sep=";",
+            na_values=["?"],
+            low_memory=False
+        )
+
+        df["Global_active_power"] = pd.to_numeric(
+            df["Global_active_power"],
+            errors="coerce"
+        )
+
+        return df.dropna(subset=["Global_active_power"])
+
     with st.spinner("Loading electricity dataset..."):
         energy_df = load_data()
 
@@ -125,9 +126,11 @@ if DATA_PATH.exists():
     st.caption("Displaying the first 500 valid readings.")
 
 else:
-    st.warning("Dataset not found. Check your data folder.")
+    st.info(
+        "Historical data is available locally, but the dataset "
+        "has not been included in the online deployment yet."
+    )
 
-st.divider()
 
 # Footer
 st.markdown(
