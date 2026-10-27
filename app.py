@@ -14,9 +14,7 @@ st.set_page_config(
 # Project paths
 PROJECT_DIR = Path(__file__).resolve().parent
 MODEL_PATH = PROJECT_DIR / "models" / "energy_model.pkl"
-DATA_PATH = (
-    PROJECT_DIR / "data" / "household_power_consumption.txt"
-)
+DATA_PATH = PROJECT_DIR / "data" / "energy_history.csv"
 
 # Dashboard heading
 st.title("⚡ AI Energy Consumption Forecasting System")
@@ -96,12 +94,7 @@ st.header("📊 Historical Electricity Consumption")
 if DATA_PATH.exists():
     @st.cache_data
     def load_data():
-        df = pd.read_csv(
-            DATA_PATH,
-            sep=";",
-            na_values=["?"],
-            low_memory=False
-        )
+        df = pd.read_csv(DATA_PATH)
 
         df["Global_active_power"] = pd.to_numeric(
             df["Global_active_power"],
