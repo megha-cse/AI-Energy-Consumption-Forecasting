@@ -88,3 +88,10 @@ Computer Science Engineering Student
 ---
 
 ⭐ If you find this project interesting, feel free to explore the repository and try the live demo!
+## 📸 Project Visualizations
+
+### Actual vs Predicted Energy Consumption
+![Actual vs Predicted Energy Consumption](outputs/actual_vs_predicted.png)
+
+### Historical Energy Consumption
+![Historical Energy Consumption](outputs/energy_consumption.png)
